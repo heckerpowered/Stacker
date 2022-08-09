@@ -6,12 +6,11 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import heckerpowered.stacker.util.StackerUtil;
-import net.minecraft.world.Container;
 import net.minecraftforge.items.ItemStackHandler;
 
 @Mixin(ItemStackHandler.class)
-public abstract class ItemStackHandlerMixin implements Container {
-    @Inject(method = "getSlotLimit", at = @At("HEAD"), cancellable = true)
+public abstract class ItemStackHandlerMixin {
+    @Inject(method = "getSlotLimit", at = @At("HEAD"), cancellable = true, remap = false)
     public void getSlotLimit(int slot, CallbackInfoReturnable<Integer> info) {
         info.setReturnValue(StackerUtil.getMaxStackSize());
     }
