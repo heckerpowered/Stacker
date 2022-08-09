@@ -10,6 +10,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import heckerpowered.stacker.util.StackerUtil;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.world.item.ItemStack;
 
@@ -26,7 +27,7 @@ public abstract class ItemStackMixin {
     @Inject(method = "getMaxStackSize", at = @At("HEAD"), cancellable = true)
     public final void getMaxStackSize(CallbackInfoReturnable<Integer> info) {
         if (getMaxDamage() == 0) {
-            info.setReturnValue(Integer.MAX_VALUE);
+            info.setReturnValue(StackerUtil.getMaxStackSize());
         }
     }
 
